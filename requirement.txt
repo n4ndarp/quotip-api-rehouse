@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+jinja2 #template
+aiofiles
+sqlalchemy #db
+psycopg2
+python-dotenv #env var
+passlib[bcrypt] #pass hash

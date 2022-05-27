@@ -22,9 +22,10 @@ class Story(Base):
     __tablename__ = "stories"
 
     id = Column(Integer, primary_key=True, index=True)
-    story = Column(TEXT, nullable=False)
+    story = Column(String(500), nullable=False)
     user_id = Column(Integer, ForeignKey("users.id"))
     quote_id = Column(Integer, ForeignKey("quotes.id"))
+    quote = relationship("Quote", back_populates="story")
     #quote = relationship("Quote", back_populates="story")
     #user = relationship("User", back_populates="story")
 
@@ -33,4 +34,4 @@ class Quote(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     text = Column(String(45), nullable=False)
-    story = relationship("Story")
+    story = relationship("Story", back_populates="quote")

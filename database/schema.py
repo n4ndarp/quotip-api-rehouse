@@ -1,16 +1,16 @@
 from typing import List, Union
 from pydantic import BaseModel
+from pydantic.schema import Optional
 
 class StoryBase(BaseModel):
     story: str
-    user_id: int
-    quote_id: int
 
 class StoryCreate(StoryBase):
     pass
 
 class Story(StoryBase):
-    id: str
+    id: int
+    user_id: int
 
     class Config:
         orm_mode = True
@@ -24,9 +24,13 @@ class QuoteCreate(QuoteBase):
     pass
 
 class Quote(QuoteBase):
-    id: str
+    id: int
     story: List[Story] = []
+    class Config:
+        orm_mode = True
 
+class StoryDef(Story):
+    quote: Optional[List[Quote]] = []
     class Config:
         orm_mode = True
 
@@ -46,11 +50,7 @@ class User(UserBase):
     class Config:
         orm_mode = True
 
-class UserGet(BaseModel): #very crude alternative. currently using this until i know what shit happened
-    username: str
-    name: str
-    biography: str
+class UserGet(UserBase): #idk if this stuff's any different from ^ but this doesn't give me errors
     story: List[Story] = []
-
     class Config:
         orm_mode = True  
