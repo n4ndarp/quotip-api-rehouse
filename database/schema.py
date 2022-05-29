@@ -15,6 +15,10 @@ class Story(StoryBase):
     class Config:
         orm_mode = True
 
+class StoryOut(StoryBase):
+    class Config:
+        orm_mode = True
+
 #===========================================================
 
 class QuoteBase(BaseModel):
@@ -25,9 +29,16 @@ class QuoteCreate(QuoteBase):
 
 class Quote(QuoteBase):
     id: int
-    story: List[Story] = []
+    story: Optional[List[Story]] = []
     class Config:
         orm_mode = True
+
+class QuoteGet(BaseModel):
+    id: int
+    text: str
+    story: Optional[List[Story]] = []
+    class Config:
+        orm_mode = True    
 
 class StoryDef(Story):
     quote: Optional[List[Quote]] = []

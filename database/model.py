@@ -33,5 +33,5 @@ class Quote(Base):
     __tablename__ = "quotes"
 
     id = Column(Integer, primary_key=True, index=True)
-    text = Column(String(45), nullable=False)
+    text = Column(String(250), nullable=False)
     story = relationship("Story", back_populates="quote")
